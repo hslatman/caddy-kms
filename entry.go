@@ -65,6 +65,11 @@ type Entry struct {
 	// connection policy can select it explicitly. Only the certificate loader
 	// uses them; the certificate manager ignores them.
 	Tags []string `json:"tags,omitempty"`
+
+	// src is the resolver for this entry, set during provisioning. It lives on
+	// the config type because Loader has to be a slice and so cannot carry
+	// state of its own; Manager reuses it through its embedded Entry.
+	src *Source
 }
 
 // replace returns a copy of e with Caddy placeholders expanded.

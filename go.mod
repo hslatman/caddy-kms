@@ -2,7 +2,11 @@ module github.com/hslatman/caddy-kms
 
 go 1.25.8
 
-require go.step.sm/crypto v0.87.0
+require (
+	github.com/caddyserver/caddy/v2 v2.11.4
+	go.step.sm/crypto v0.87.0
+	go.uber.org/zap v1.28.0
+)
 
 require (
 	dario.cat/mergo v1.0.2 // indirect
@@ -11,7 +15,6 @@ require (
 	github.com/Masterminds/semver/v3 v3.4.0 // indirect
 	github.com/Masterminds/sprig/v3 v3.3.0 // indirect
 	github.com/beorn7/perks v1.0.1 // indirect
-	github.com/caddyserver/caddy/v2 v2.11.4 // indirect
 	github.com/caddyserver/certmagic v0.25.3 // indirect
 	github.com/caddyserver/zerossl v0.1.5 // indirect
 	github.com/cespare/xxhash/v2 v2.3.0 // indirect
@@ -38,14 +41,12 @@ require (
 	github.com/prometheus/procfs v0.20.1 // indirect
 	github.com/quic-go/qpack v0.6.0 // indirect
 	github.com/quic-go/quic-go v0.59.1 // indirect
-	github.com/rogpeppe/go-internal v1.10.0 // indirect
 	github.com/schollz/jsonstore v1.1.0 // indirect
 	github.com/shopspring/decimal v1.4.0 // indirect
 	github.com/smallstep/go-attestation v0.4.4-0.20260603212853-e1a87a0b07d9 // indirect
 	github.com/spf13/cast v1.7.0 // indirect
 	github.com/zeebo/blake3 v0.2.4 // indirect
 	go.uber.org/multierr v1.11.0 // indirect
-	go.uber.org/zap v1.28.0 // indirect
 	go.uber.org/zap/exp v0.3.0 // indirect
 	go.yaml.in/yaml/v2 v2.4.4 // indirect
 	golang.org/x/crypto v0.54.0 // indirect
