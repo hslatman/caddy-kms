@@ -1,0 +1,4 @@
+/caddy
+/dist/
+*.test
+coverage.out

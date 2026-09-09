@@ -1,0 +1,58 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: '1.25'
+      - name: Lint
+        run: |
+          test -z "$(gofmt -l .)"
+          go vet ./...
+      - name: Test
+        env:
+          CGO_ENABLED: '0'
+        run: go test ./...
+      - name: Test with race detector
+        run: go test -race ./...
+
+  tpm-simulator:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: '1.25'
+      - name: Install simulator dependencies
+        run: sudo apt-get update && sudo apt-get install -y libssl-dev
+      - name: Test with TPM simulator
+        env:
+          CGO_ENABLED: '1'
+        run: go test -tags tpmsimulator ./...
+
+  xcaddy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: '1.25'
+      - name: Install xcaddy
+        run: go install github.com/caddyserver/xcaddy/cmd/xcaddy@latest
+      - name: Build Caddy with the module
+        run: xcaddy build --with github.com/hslatman/caddy-kms=.
